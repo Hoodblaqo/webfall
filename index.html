@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#080b12"><meta name="description" content="WEBFALL — a cinematic dive through the city.">
+<title>WEBFALL — Above the ordinary</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+:root{--ink:#f4f6fb;--muted:#9aa4b5;--red:#ff3d55;--blue:#6bc8ff;--line:rgba(255,255,255,.16);--mx:0;--my:0;--scroll:0}
+*{box-sizing:border-box}html{scroll-behavior:smooth;background:#080b12}body{margin:0;background:#080b12;color:var(--ink);font-family:'Space Grotesk',sans-serif;overflow-x:hidden;cursor:crosshair}a{color:inherit;text-decoration:none}button{font:inherit}
+.noise{position:fixed;inset:0;z-index:8;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.6'/%3E%3C/svg%3E")}
+#stars{position:fixed;inset:0;z-index:0;width:100%;height:100%;pointer-events:none}
+.topbar{position:fixed;z-index:20;top:0;left:0;width:100%;padding:25px 5vw;display:flex;justify-content:space-between;align-items:center;mix-blend-mode:screen}.brand{font:500 12px 'DM Mono';letter-spacing:.22em}.brand b{color:var(--red);font-weight:500}.nav{display:flex;gap:30px;font:10px 'DM Mono';letter-spacing:.12em;color:#c3cad5}.nav a{opacity:.7;transition:.25s}.nav a:hover{opacity:1;color:var(--blue)}
+.progress{position:fixed;z-index:22;top:0;left:0;height:2px;width:100%;background:#ffffff12}.progress i{display:block;width:calc(var(--scroll)*100%);height:100%;background:linear-gradient(90deg,var(--red),var(--blue));box-shadow:0 0 16px var(--blue)}
+.scene{position:fixed;inset:0;z-index:1;overflow:hidden;pointer-events:none;perspective:1000px}.cityglow{position:absolute;width:70vw;height:70vw;max-width:900px;max-height:900px;left:50%;top:50%;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(46,103,151,.23),transparent 65%);filter:blur(20px)}
+.city{position:absolute;inset:-8%;width:116%;height:116%;object-fit:cover;opacity:.43;filter:grayscale(.75) contrast(1.2) brightness(.55);transform:translate3d(calc(var(--mx)*-12px),calc(var(--my)*-10px),0) scale(1.08);transition:filter .5s}
+.web-lines{position:absolute;inset:0;width:100%;height:100%;opacity:.2;transform:scale(calc(1 + var(--scroll)*.12)) rotate(calc(var(--mx)*1deg));}
+.shard{position:absolute;left:50%;top:47%;width:min(34vw,430px);aspect-ratio:.72;transform:translate(-50%,-50%) rotateX(calc(var(--my)*-8deg)) rotateY(calc(var(--mx)*12deg)) rotateZ(-9deg);transition:transform .18s ease-out;filter:drop-shadow(0 35px 65px #000b);opacity:.88}
+.shard svg{width:100%;height:100%;overflow:visible}.hero-figure{position:absolute;left:50%;top:51%;width:min(45vw,500px);height:min(65vh,690px);transform:translate(-50%,-50%) translate3d(calc(var(--mx)*18px),calc(var(--my)*14px),0) rotate(calc(var(--mx)*-2deg));filter:drop-shadow(0 24px 55px #000b);animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{translate:0 0}50%{translate:0 -15px}}
+.orbit{position:absolute;left:50%;top:50%;width:min(70vw,800px);aspect-ratio:1;border:1px solid #b6dfff22;border-radius:50%;transform:translate(-50%,-50%) rotateX(72deg);box-shadow:0 0 90px #68bfff12,inset 0 0 90px #68bfff12;animation:orbit 28s linear infinite}
+@keyframes orbit{to{transform:translate(-50%,-50%) rotateX(72deg) rotateZ(360deg)}}
+.scan{position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,#7acfff66,transparent);box-shadow:0 0 20px #69caff;animation:scan 7s ease-in-out infinite}
+@keyframes scan{0%,100%{transform:translateY(-38vh);opacity:0}20%,80%{opacity:.7}50%{transform:translateY(38vh)}}
+main{position:relative;z-index:3}.section{min-height:100svh;position:relative;display:flex;align-items:center;padding:12vh 9vw}.hero{min-height:100svh;align-items:flex-end;padding-bottom:13vh}.hero-copy{width:min(570px,80vw);position:relative;z-index:4}.eyebrow,.micro{font:10px 'DM Mono';letter-spacing:.18em;text-transform:uppercase;color:#aab6c6}.eyebrow{display:flex;align-items:center;gap:12px}.eyebrow:before{content:'';width:30px;height:1px;background:var(--red);box-shadow:0 0 10px var(--red)}
+h1{font-size:clamp(62px,11.5vw,168px);line-height:.78;letter-spacing:-.09em;margin:27px 0 24px;font-weight:600;text-transform:uppercase;text-shadow:0 10px 55px #0009}h1 span{display:block;color:transparent;-webkit-text-stroke:1px #eaf3ffb8;margin-left:10vw}.hero-copy p{max-width:350px;font-size:14px;line-height:1.7;color:#c4ccd7;margin:0 0 28px}.cta{display:inline-flex;align-items:center;gap:16px;padding:13px 17px;border:1px solid #d7e8f655;background:#0c1420aa;backdrop-filter:blur(15px);font:10px 'DM Mono';letter-spacing:.12em;text-transform:uppercase;transition:.3s}.cta:hover{border-color:var(--blue);box-shadow:0 0 30px #65caff25;transform:translateY(-3px)}.cta i{width:22px;height:22px;display:grid;place-items:center;border-radius:50%;background:var(--red);font-style:normal;color:#fff}
+.corner{position:absolute;right:5vw;bottom:7vh;text-align:right;font:9px/1.8 'DM Mono';letter-spacing:.1em;color:#aeb8c6}.corner strong{display:block;color:#e8f3ff;font-size:11px;font-weight:400}
+.side-label{position:fixed;z-index:12;left:26px;top:50%;writing-mode:vertical-rl;transform:rotate(180deg);font:9px 'DM Mono';letter-spacing:.22em;color:#9ca9bb;opacity:.8}.scroll-hint{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);font:9px 'DM Mono';letter-spacing:.16em;color:#b7c3d3;display:flex;gap:12px;align-items:center}.scroll-hint:after{content:'';height:35px;width:1px;background:linear-gradient(var(--blue),transparent);animation:hint 1.7s infinite}@keyframes hint{50%{transform:scaleY(.45);transform-origin:top}}
+.content{width:min(540px,88vw);margin-left:auto}.content.left{margin-left:0}.section .content h2{font-size:clamp(42px,7vw,92px);line-height:.92;letter-spacing:-.07em;margin:18px 0 24px}.content p{color:#b8c3d2;line-height:1.8;font-size:14px;max-width:420px}.index{font:10px 'DM Mono';color:var(--red);letter-spacing:.18em}.statline{display:flex;gap:34px;margin-top:35px}.statline strong{display:block;font-size:27px;letter-spacing:-.06em}.statline small{font:9px 'DM Mono';color:#99a6b7;letter-spacing:.12em}
+.panel{border:1px solid #c9e7ff30;background:linear-gradient(135deg,#d8efff12,#08111d77);backdrop-filter:blur(16px);padding:25px;width:min(350px,80vw);margin-top:35px;box-shadow:0 25px 80px #0004}.panel .micro{color:#86cfff}.panel h3{font-size:23px;margin:10px 0}.panel p{font-size:12px;margin:0}
+.final{min-height:95svh;justify-content:center;text-align:center}.final .content{margin:auto}.final h2{font-size:clamp(55px,10vw,130px)!important}.final .cta{margin-top:18px}
+footer{position:relative;z-index:4;display:flex;justify-content:space-between;padding:24px 5vw 35px;border-top:1px solid #fff2;font:9px 'DM Mono';letter-spacing:.12em;color:#8896a8}
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.8,.2,1)}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:700px){.topbar{padding:19px 20px}.nav{gap:13px;font-size:8px}.side-label{left:9px;font-size:8px}.hero{padding:0 8vw 16vh}.hero-copy{width:90vw}h1{font-size:clamp(62px,17vw,112px);margin:22px 0}.hero-copy p{font-size:13px;max-width:270px}.hero-figure{width:76vw;height:56vh;top:39%;opacity:.96}.shard{width:60vw;top:39%}.orbit{width:95vw}.section{padding:13vh 9vw;min-height:100svh}.content{margin:0!important}.section .content h2{font-size:clamp(45px,13vw,75px)}.corner{right:6vw;bottom:5vh;font-size:8px}.scroll-hint{bottom:19px}.statline{gap:20px}.statline strong{font-size:22px}footer{font-size:8px;gap:20px}.city{opacity:.34}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="progress"><i></i></div><div class="noise"></div><canvas id="stars"></canvas>
+<header class="topbar"><a class="brand" href="#top">WEB<b>／</b>FALL<span style="color:#8290a2">®</span></a><nav class="nav"><a href="#origin">ORIGIN</a><a href="#swing">MOTION</a><a href="#signal">SIGNAL</a></nav></header>
+<div class="side-label">NEW YORK CITY — 02:17 AM — ABOVE THE NOISE</div>
+<div class="scene" aria-hidden="true">
+<div class="cityglow"></div>
+<svg class="city" viewBox="0 0 1440 1000" preserveAspectRatio="xMidYMid slice">
+<defs><linearGradient id="night" x2="0" y2="1"><stop stop-color="#182d42"/><stop offset="1" stop-color="#03060c"/></linearGradient><linearGradient id="glass" x2="1" y2="1"><stop stop-color="#6e9fbd" stop-opacity=".5"/><stop offset=".45" stop-color="#152435"/><stop offset="1" stop-color="#8eb4ce" stop-opacity=".2"/></linearGradient></defs>
+<rect width="1440" height="1000" fill="url(#night)"/>
+<g stroke="#91b9d3" stroke-opacity=".22" stroke-width="2">
+<path fill="url(#glass)" d="M0 120L220 35 310 1000H0z"/><path fill="#111f30" d="M260 0h260l90 1000H300z"/><path fill="url(#glass)" d="M600 90l220-110 130 1020H570z"/><path fill="#101c2a" d="M950 0h250l140 1000H920z"/><path fill="url(#glass)" d="M1220 130l220-70v940h-180z"/>
+</g>
+<g stroke="#b5d6e8" stroke-opacity=".22" fill="none">
+<path d="M40 200h250M52 270h250M70 340h245M92 410h230M115 480h215M135 550h210M160 620h190M180 690h175M205 760h160M625 200h250M640 280h260M650 360h275M665 440h280M680 520h285M700 600h290M980 160h260M990 240h270M1005 320h280M1020 400h290M1040 480h300M1060 560h310M1075 640h315"/>
+<path d="M100 0l160 1000M190 0l160 1000M690 0l80 1000M780 0l80 1000M1040 0l80 1000M1140 0l100 1000"/>
+</g>
+<g fill="#d4edff" opacity=".3"><circle cx="190" cy="230" r="3"/><circle cx="700" cy="390" r="3"/><circle cx="1120" cy="520" r="3"/><circle cx="320" cy="690" r="2"/><circle cx="890" cy="170" r="2"/></g></svg>
+<svg class="web-lines" viewBox="0 0 1000 1000" preserveAspectRatio="none"><g fill="none" stroke="#8bd3ff" stroke-width="1"><path d="M500 500L0 0M500 500L1000 0M500 500L0 1000M500 500L1000 1000M500 500L500 0M500 500L0 500M500 500L1000 500M500 500L500 1000"/><path d="M500 500Q250 200 0 0M500 500Q750 200 1000 0M500 500Q250 800 0 1000M500 500Q750 800 1000 1000" opacity=".7"/></g></svg>
+<div class="orbit"></div><div class="scan"></div>
+<div class="shard"><svg viewBox="0 0 400 570"><defs><linearGradient id="ice" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#f3fbff" stop-opacity=".9"/><stop offset=".25" stop-color="#75c9f5" stop-opacity=".55"/><stop offset=".6" stop-color="#1e5c88" stop-opacity=".22"/><stop offset="1" stop-color="#e7f7ff" stop-opacity=".75"/></linearGradient><filter id="glow"><feGaussianBlur stdDeviation="12"/></filter></defs><path d="M195 4L371 126 318 430 176 558 24 391 56 120z" fill="#75d3ff" opacity=".15" filter="url(#glow)"/><path d="M195 4L371 126 318 430 176 558 24 391 56 120z" fill="url(#ice)" stroke="#e4f7ff" stroke-opacity=".8" stroke-width="2"/><path d="M195 4L208 260 56 120zM195 4L371 126 208 260zM371 126L318 430 208 260zM318 430L176 558 208 260zM176 558L24 391 208 260zM24 391L56 120 208 260z" fill="#d9f5ff" fill-opacity=".1" stroke="#dff6ff" stroke-opacity=".55"/><path d="M195 4L208 260 318 430" fill="none" stroke="#fff" stroke-width="2" opacity=".7"/></svg></div>
+<svg class="hero-figure" viewBox="0 0 500 700" aria-hidden="true">
+<defs><linearGradient id="redSuit" x2="1" y2="1"><stop stop-color="#ff6b73"/><stop offset=".45" stop-color="#c91d37"/><stop offset="1" stop-color="#650d27"/></linearGradient><linearGradient id="blueSuit" x2="1" y2="1"><stop stop-color="#45c5f6"/><stop offset="1" stop-color="#0a2c57"/></linearGradient></defs>
+<g stroke="#071321" stroke-width="7" stroke-linejoin="round">
+<!-- dynamic acrobat silhouette, original vector -->
+<path fill="url(#blueSuit)" d="M225 350Q150 360 95 425L20 485Q-2 514 27 531Q55 548 83 518L173 467Q232 449 275 427z"/>
+<path fill="url(#redSuit)" d="M205 300Q153 268 111 210L53 126Q34 91 58 77Q85 61 108 92L190 169Q228 204 274 208L330 262 285 365z"/>
+<path fill="url(#blueSuit)" d="M255 385Q300 410 353 468L426 537Q451 558 475 535Q493 515 468 488L401 390Q365 326 320 298z"/>
+<path fill="url(#redSuit)" d="M175 328Q215 284 276 287Q340 288 367 340L346 440Q313 488 253 480Q196 466 153 414z"/>
+<path fill="url(#redSuit)" d="M259 300Q286 238 331 205L410 135Q438 112 458 136Q478 159 448 182L378 260Q359 295 347 343z"/>
+<path fill="url(#blueSuit)" d="M165 400Q116 447 103 520L76 612Q68 643 98 652Q128 660 139 628L185 548Q224 502 259 477z"/>
+<path fill="url(#redSuit)" d="M240 300Q224 248 250 208Q281 164 330 184Q375 205 364 256Q356 301 313 325z"/>
+<path fill="#e9f8ff" stroke="#101b2b" stroke-width="8" d="M268 230Q286 204 309 218L299 244Q280 254 268 230zM322 221Q345 211 354 236L337 252Q319 246 322 221z"/>
+</g>
+<g fill="none" stroke="#071321" stroke-width="2.5" opacity=".8"><path d="M249 211l42 47 58-39M255 222l88 26M262 246l72-38M175 334l86 82 80-76M183 355l155 16M195 389l126-87M170 404l-45 106M190 425l-54 177M337 343l77-100M354 357l87-190M85 102l22 80 82 30M62 124l126 80"/></g>
+<path d="M330 184Q351 175 364 200" fill="none" stroke="#fff" stroke-width="3" opacity=".5"/>
+</svg>
+</div>
+<main id="top">
+<section class="section hero">
+<div class="hero-copy reveal visible"><div class="eyebrow">A CITY WITHOUT A CEILING <span style="color:#71849a">/ ISSUE 001</span></div><h1>WEB<span>FALL.</span></h1><p>One city. A thousand ways down. Find your own gravity in a world built between the rooftops and the stars.</p><a class="cta" href="#origin"><i>↓</i> ENTER THE DROP</a></div>
+<div class="corner">ALTITUDE <strong>1,247 FT</strong>LAT 40° 43' 12.4" N<br>STATUS <strong>IN MOTION</strong></div><div class="scroll-hint">SCROLL TO DESCEND</div>
+</section>
+<section class="section" id="origin"><div class="content left reveal"><div class="index">01 / THE ORIGIN</div><h2>THE CITY<br>IS A LIVING<br>THING.</h2><p>Steel canyons. Electric windows. A thousand stories happening at once. Somewhere above the static, a silhouette cuts through the night.</p><div class="statline"><div><strong>01:47</strong><small>LOCAL TIME</small></div><div><strong>∞</strong><small>WAYS TO MOVE</small></div><div><strong>NYC</strong><small>THE PLAYGROUND</small></div></div></div></section>
+<section class="section" id="swing"><div class="content reveal"><div class="index">02 / THE MOTION</div><h2>NO MAP.<br>NO LIMITS.</h2><p>Every edge is a beginning. Every fall is a flight path. Move with the current, follow the light, and let the skyline pull you forward.</p><div class="panel"><div class="micro">MOVEMENT LOG // 002</div><h3>Momentum detected.</h3><p>Scroll, move your pointer, tilt your world. The scene follows your signal.</p></div></div></section>
+<section class="section" id="signal"><div class="content left reveal"><div class="index">03 / THE SIGNAL</div><h2>STAY<br>ABOVE<br>THE NOISE.</h2><p>The night doesn't wait. Neither should you. Find the next rooftop, catch the next spark, and keep going.</p><a class="cta" href="#top"><i>↗</i> REPLAY THE DROP</a></div></section>
+<section class="section final"><div class="content reveal"><div class="index">END OF TRANSMISSION / BEGIN AGAIN</div><h2>SEE YOU<br>UP THERE.</h2><a class="cta" href="#top"><i>↑</i> BACK TO THE SKY</a></div></section>
+</main>
+<footer><span>WEBFALL® — A NIGHT ABOVE THE ORDINARY</span><span>BUILT FOR THE IN-BETWEEN</span><span>© 2026</span></footer>
+<script>
+(()=>{const root=document.documentElement,reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;let mx=0,my=0,tx=0,ty=0;
+addEventListener('pointermove',e=>{tx=(e.clientX/innerWidth-.5)*2;ty=(e.clientY/innerHeight-.5)*2},{passive:true});
+const sections=[...document.querySelectorAll('.reveal')];const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')}),{threshold:.18});sections.forEach(x=>io.observe(x));
+let last=0;function frame(){mx+=(tx-mx)*.055;my+=(ty-my)*.055;root.style.setProperty('--mx',mx.toFixed(3));root.style.setProperty('--my',my.toFixed(3));const max=document.documentElement.scrollHeight-innerHeight;root.style.setProperty('--scroll',max>0?(scrollY/max).toFixed(4):0);requestAnimationFrame(frame)}if(!reduce)frame();else root.style.setProperty('--scroll',0);
+const c=document.getElementById('stars'),ctx=c.getContext('2d');let w,h,dpr,pts=[];function resize(){dpr=Math.min(devicePixelRatio||1,1.5);w=innerWidth;h=innerHeight;c.width=w*dpr;c.height=h*dpr;c.style.width=w+'px';c.style.height=h+'px';ctx.setTransform(dpr,0,0,dpr,0,0);pts=Array.from({length:Math.min(100,Math.floor(w*h/9500))},()=>({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.25,v:Math.random()*.22+.04,a:Math.random()*.65+.15}))}function stars(){ctx.clearRect(0,0,w,h);for(const p of pts){p.y-=p.v;if(p.y<0){p.y=h;p.x=Math.random()*w}ctx.globalAlpha=p.a;ctx.fillStyle='#d8f1ff';ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fill()}ctx.globalAlpha=1;if(!reduce)requestAnimationFrame(stars)}addEventListener('resize',resize);resize();stars();
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{const el=document.querySelector(a.getAttribute('href'));if(el){e.preventDefault();el.scrollIntoView({behavior:reduce?'auto':'smooth'})}}));
+})();
+</script>
+</body></html>
